@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Sui Order Book Market Maker
 
-## Getting Started
+An automated market maker built on **Sui’s native order book** using **limit orders**, designed to provide continuous, capital-efficient liquidity without relying on traditional AMM pricing curves.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚩 Problem
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Most decentralized liquidity today is dominated by **automated market makers (AMMs)**, which:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Require large amounts of capital to minimize slippage
+- Perform poorly in volatile or thin markets
+- Do not leverage native order book infrastructure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+On order-book–based blockchains like **Sui**, there is a gap in tooling for **autonomous market makers** that can continuously quote liquidity using limit orders.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 💡 Solution
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project introduces an **order-book-based market maker** that:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Programmatically places **bid and ask limit orders**
+- Maintains a configurable spread around the mid-price
+- Reacts to order fills by re-quoting liquidity
+- Manages inventory exposure automatically
 
-## Deploy on Vercel
+By providing liquidity **directly on the Sui order book**, the system enables better price discovery and improved capital efficiency compared to AMM-based designs.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚙️ How It Works
+
+1. Fetch the best bid and ask prices from the order book
+2. Calculate the mid-price
+3. Place symmetric limit orders around the mid-price
+4. Monitor order fills and cancellations
+5. Rebalance inventory and update open orders
+
+The architecture supports:
+
+- Dynamic spread adjustment based on market conditions
+- Inventory and risk limits
+- Extension to multiple trading pairs
+
+---
