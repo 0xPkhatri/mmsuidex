@@ -1,5 +1,13 @@
-import Image from "next/image";
+import Header from "@/components/Header";
+import OrderBook from "@/components/OrderBook";
+import Controls from "@/components/Controls";
 
 export default function Home() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <main className="container">
+      <Header />
+      <Controls />
+      <OrderBook />
+    </main>
+  );
 }
